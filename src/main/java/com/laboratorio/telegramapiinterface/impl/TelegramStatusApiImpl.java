@@ -31,7 +31,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataWriter;
  * @author Rafael
  * @version 1.0
  * @created 23/08/2024
- * @updated 24/08/2024
+ * @updated 25/09/2024
  */
 public class TelegramStatusApiImpl implements TelegramStatusApi {
     protected static final Logger log = LogManager.getLogger(TelegramStatusApiImpl.class);
@@ -48,7 +48,7 @@ public class TelegramStatusApiImpl implements TelegramStatusApi {
     private void logException(Exception e) {
         log.error("Error: " + e.getMessage());
         if (e.getCause() != null) {
-            log.error("Causa: " + e.getMessage());
+            log.error("Causa: " + e.getCause().getMessage());
         }
     }
     

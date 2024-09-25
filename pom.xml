@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.laboratorio</groupId>
     <artifactId>telegramapiinterface</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
     <name>Telegram-Api-Interface</name>
-    <description>Librería que ejecutar las API de la red social Telegram</description>
+    <description>Librería que ejecuta las API de la red social Telegram</description>
     
     <url>https://github.com/labdertafa/telegramapiinterface</url>
     <licenses>
@@ -26,8 +26,8 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
     
     <distributionManagement>
@@ -89,6 +89,20 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.3</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <artifactId>junit</artifactId>
+            <groupId>junit</groupId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
             <version>5.10.3</version>
             <scope>test</scope>
         </dependency>
