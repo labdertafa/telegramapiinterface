@@ -52,7 +52,7 @@ public class TelegramStatusApiTest {
     
     @Test @Order(3)
     public void postStatusWithImage() throws Exception {
-        String texto = "Este es un mensaje de prueba enviado desde JUNI5";
+        String texto = "Este es un mensaje de prueba enviado desde JUNI5 que acompaña la maravillosa foto del Laboratorio de Rafa";
         String filePath = "C:\\Users\\rafa\\Pictures\\Tutoriales\\laboratorio-2024.jpg";
         
         TelegramSendMessageResponse response = this.statusApi.postStatus(texto, filePath);
