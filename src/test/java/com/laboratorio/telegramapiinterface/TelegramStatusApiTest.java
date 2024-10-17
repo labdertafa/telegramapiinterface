@@ -1,7 +1,7 @@
 package com.laboratorio.telegramapiinterface;
 
 import com.laboratorio.telegramapiinterface.impl.TelegramStatusApiImpl;
-import com.laboratorio.telegramapiinterface.model.response.TelegramSendMessageResponse;
+import com.laboratorio.telegramapiinterface.model.TelegramStatus;
 import com.laboratorio.telegramapiinterface.utils.TelegramApiConfig;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,9 +13,9 @@ import org.junit.jupiter.api.TestMethodOrder;
 /**
  *
  * @author Rafael
- * @version 1.0
+ * @version 1.1
  * @created 23/08/2024
- * @updated 24/08/2024
+ * @updated 17/10/2024
  */
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -36,11 +36,10 @@ public class TelegramStatusApiTest {
     public void postStatus() {
         String texto = "Este es un mensaje de prueba enviado desde JUNI5";
         
-        TelegramSendMessageResponse response = this.statusApi.postStatus(texto);
-        messageId = response.getResult().getMessage_id();
+        TelegramStatus status = this.statusApi.postStatus(texto);
+        messageId = status.getMessage_id();
         
-        assertTrue(response.isOk());
-        assertTrue(response.getResult().getPhoto() == null);
+        assertTrue(status.getPhoto() == null);
     }
     
     @Test @Order(2)
@@ -55,11 +54,10 @@ public class TelegramStatusApiTest {
         String texto = "Este es un mensaje de prueba enviado desde JUNI5 que acompaña la maravillosa foto del Laboratorio de Rafa";
         String filePath = "C:\\Users\\rafa\\Pictures\\Tutoriales\\laboratorio-2024.jpg";
         
-        TelegramSendMessageResponse response = this.statusApi.postStatus(texto, filePath);
-        messageId = response.getResult().getMessage_id();
+        TelegramStatus status = this.statusApi.postStatus(texto, filePath);
+        messageId = status.getMessage_id();
         
-        assertTrue(response.isOk());
-        assertTrue(!response.getResult().getPhoto().isEmpty());
+        assertTrue(!status.getPhoto().isEmpty());
     }
     
     @Test @Order(4)

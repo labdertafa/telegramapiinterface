@@ -9,13 +9,13 @@ import lombok.Setter;
 /**
  *
  * @author Rafael
- * @version 1.0
+ * @version 1.1
  * @created 23/08/2024
- * @updated 24/08/2024
+ * @updated 17/10/2024
  */
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class TelegramSendResult {
+public class TelegramStatus {
     private int message_id;
     private String author_signature;
     private TelegramChat sender_chat;

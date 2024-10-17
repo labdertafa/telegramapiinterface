@@ -1,6 +1,6 @@
 package com.laboratorio.telegramapiinterface.model.response;
 
-import com.laboratorio.telegramapiinterface.model.TelegramSendResult;
+import com.laboratorio.telegramapiinterface.model.TelegramStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,5 +17,5 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class TelegramSendMessageResponse {
     private boolean ok;
-    private TelegramSendResult result;
+    private TelegramStatus result;
 }

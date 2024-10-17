@@ -8,8 +8,10 @@ import com.laboratorio.clientapilibrary.model.ApiMethodType;
 import com.laboratorio.clientapilibrary.model.ApiRequest;
 import com.laboratorio.clientapilibrary.model.ApiResponse;
 import com.laboratorio.telegramapiinterface.TelegramStatusApi;
+import com.laboratorio.telegramapiinterface.exception.TelegramApiException;
 import com.laboratorio.telegramapiinterface.model.TelegramDeleteMessage;
 import com.laboratorio.telegramapiinterface.model.TelegramSendMessage;
+import com.laboratorio.telegramapiinterface.model.TelegramStatus;
 import com.laboratorio.telegramapiinterface.model.response.TelegramDeleteMessageResponse;
 import com.laboratorio.telegramapiinterface.model.response.TelegramSendMessageResponse;
 import com.laboratorio.telegramapiinterface.utils.TelegramApiConfig;
@@ -19,9 +21,9 @@ import org.apache.logging.log4j.Logger;
 /**
  *
  * @author Rafael
- * @version 1.1
+ * @version 1.2
  * @created 23/08/2024
- * @updated 04/10/2024
+ * @updated 17/10/2024
  */
 public class TelegramStatusApiImpl implements TelegramStatusApi {
     protected static final Logger log = LogManager.getLogger(TelegramStatusApiImpl.class);
@@ -47,7 +49,7 @@ public class TelegramStatusApiImpl implements TelegramStatusApi {
     }
     
     @Override
-    public TelegramSendMessageResponse postStatus(String text) {
+    public TelegramStatus postStatus(String text) {
         String urlBase = this.apiConfig.getProperty("url_base_telegram");
         String endpoint = this.apiConfig.getProperty("endpoint_sendmessage");
         int okStatus = Integer.parseInt(this.apiConfig.getProperty("sendmessage_valor_ok"));
@@ -63,11 +65,15 @@ public class TelegramStatusApiImpl implements TelegramStatusApi {
             
             ApiResponse response = this.client.executeApiRequest(request);
             
-            return this.gson.fromJson(response.getResponseStr(), TelegramSendMessageResponse.class);
+            TelegramSendMessageResponse telegramSendMessageResponse = this.gson.fromJson(response.getResponseStr(), TelegramSendMessageResponse.class);
+            if (!telegramSendMessageResponse.isOk()) {
+                throw new TelegramApiException(TelegramStatusApiImpl.class.getName(), "Ha ocurrido un error inesperado posteando un mensaje en Telegram");
+            }
+            return telegramSendMessageResponse.getResult();
         } catch (JsonSyntaxException e) {
             logException(e);
             throw  e;
-        } catch (ApiClientException e) {
+        } catch (ApiClientException | TelegramApiException e) {
             throw  e;
         }
     }
@@ -101,7 +107,7 @@ public class TelegramStatusApiImpl implements TelegramStatusApi {
     }
 
     @Override
-    public TelegramSendMessageResponse postStatus(String text, String filePath) throws Exception {
+    public TelegramStatus postStatus(String text, String filePath) throws Exception {
         String urlBase = this.apiConfig.getProperty("url_base_telegram");
         String endpoint = this.apiConfig.getProperty("endpoint_sendphoto");
         int okStatus = Integer.parseInt(this.apiConfig.getProperty("sendphoto_valor_ok"));
@@ -116,11 +122,15 @@ public class TelegramStatusApiImpl implements TelegramStatusApi {
             
             ApiResponse response = this.client.executeApiRequest(request);
             
-            return this.gson.fromJson(response.getResponseStr(), TelegramSendMessageResponse.class);
+            TelegramSendMessageResponse telegramSendMessageResponse = this.gson.fromJson(response.getResponseStr(), TelegramSendMessageResponse.class);
+            if (!telegramSendMessageResponse.isOk()) {
+                throw new TelegramApiException(TelegramStatusApiImpl.class.getName(), "Ha ocurrido un error inesperado posteando un mensaje en Telegram");
+            }
+            return telegramSendMessageResponse.getResult();
         } catch (JsonSyntaxException e) {
             logException(e);
             throw  e;
-        } catch (ApiClientException e) {
+        } catch (ApiClientException | TelegramApiException e) {
             throw  e;
         }
     }
