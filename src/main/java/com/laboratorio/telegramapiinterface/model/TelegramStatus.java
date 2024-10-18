@@ -11,16 +11,17 @@ import lombok.Setter;
  * @author Rafael
  * @version 1.1
  * @created 23/08/2024
- * @updated 17/10/2024
+ * @updated 18/10/2024
  */
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class TelegramStatus {
     private int message_id;
     private String author_signature;
-    private TelegramChat sender_chat;
+    private TelegramChat from;
     private TelegramChat chat;
     private long date;
     private List<TelegramPhoto> photo;
     private String text;
+    private String caption;
 }
