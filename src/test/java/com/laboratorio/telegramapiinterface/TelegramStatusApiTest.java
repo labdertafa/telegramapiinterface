@@ -1,8 +1,8 @@
 package com.laboratorio.telegramapiinterface;
 
+import com.laboratorio.clientapilibrary.utils.ReaderConfig;
 import com.laboratorio.telegramapiinterface.impl.TelegramStatusApiImpl;
 import com.laboratorio.telegramapiinterface.model.TelegramStatus;
-import com.laboratorio.telegramapiinterface.utils.TelegramApiConfig;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.TestMethodOrder;
  * @author Rafael
  * @version 1.1
  * @created 23/08/2024
- * @updated 17/10/2024
+ * @updated 04/05/2025
  */
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -25,7 +25,7 @@ public class TelegramStatusApiTest {
 
     @BeforeEach
     private void initTest() {
-        TelegramApiConfig config = TelegramApiConfig.getInstance();
+        ReaderConfig config = new ReaderConfig("config//telegram_api.properties");
         String accessToken = config.getProperty("access_token_telegram");
         String chatId = config.getProperty("id_grupo_telegram");
         

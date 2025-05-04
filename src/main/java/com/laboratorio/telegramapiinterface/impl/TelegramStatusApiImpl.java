@@ -7,6 +7,7 @@ import com.laboratorio.clientapilibrary.exceptions.ApiClientException;
 import com.laboratorio.clientapilibrary.model.ApiMethodType;
 import com.laboratorio.clientapilibrary.model.ApiRequest;
 import com.laboratorio.clientapilibrary.model.ApiResponse;
+import com.laboratorio.clientapilibrary.utils.ReaderConfig;
 import com.laboratorio.telegramapiinterface.TelegramStatusApi;
 import com.laboratorio.telegramapiinterface.exception.TelegramApiException;
 import com.laboratorio.telegramapiinterface.model.TelegramDeleteMessage;
@@ -14,7 +15,6 @@ import com.laboratorio.telegramapiinterface.model.TelegramSendMessage;
 import com.laboratorio.telegramapiinterface.model.TelegramStatus;
 import com.laboratorio.telegramapiinterface.model.response.TelegramDeleteMessageResponse;
 import com.laboratorio.telegramapiinterface.model.response.TelegramSendMessageResponse;
-import com.laboratorio.telegramapiinterface.utils.TelegramApiConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,21 +23,21 @@ import org.apache.logging.log4j.Logger;
  * @author Rafael
  * @version 1.2
  * @created 23/08/2024
- * @updated 17/10/2024
+ * @updated 04/15/2025
  */
 public class TelegramStatusApiImpl implements TelegramStatusApi {
     protected static final Logger log = LogManager.getLogger(TelegramStatusApiImpl.class);
     private final ApiClient client;
     private final String access_token;
     private final String chadId;
-    private final TelegramApiConfig apiConfig;
+    private final ReaderConfig apiConfig;
     private final Gson gson;
 
     public TelegramStatusApiImpl(String access_token, String chadId) {
         this.client = new ApiClient();
         this.access_token = access_token;
         this.chadId = chadId;
-        this.apiConfig = TelegramApiConfig.getInstance();
+        this.apiConfig = new ReaderConfig("config//telegram_api.properties");
         this.gson = new Gson();
     }
     
