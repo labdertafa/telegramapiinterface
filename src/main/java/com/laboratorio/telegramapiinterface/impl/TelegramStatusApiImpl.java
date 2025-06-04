@@ -1,7 +1,6 @@
 package com.laboratorio.telegramapiinterface.impl;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.laboratorio.clientapilibrary.ApiClient;
 import com.laboratorio.clientapilibrary.exceptions.ApiClientException;
 import com.laboratorio.clientapilibrary.model.ApiMethodType;
@@ -23,7 +22,7 @@ import org.apache.logging.log4j.Logger;
  * @author Rafael
  * @version 1.2
  * @created 23/08/2024
- * @updated 04/15/2025
+ * @updated 04/05/2025
  */
 public class TelegramStatusApiImpl implements TelegramStatusApi {
     protected static final Logger log = LogManager.getLogger(TelegramStatusApiImpl.class);
@@ -67,14 +66,13 @@ public class TelegramStatusApiImpl implements TelegramStatusApi {
             
             TelegramSendMessageResponse telegramSendMessageResponse = this.gson.fromJson(response.getResponseStr(), TelegramSendMessageResponse.class);
             if (!telegramSendMessageResponse.isOk()) {
-                throw new TelegramApiException(TelegramStatusApiImpl.class.getName(), "Ha ocurrido un error inesperado posteando un mensaje en Telegram");
+                throw new TelegramApiException("Ha ocurrido un error inesperado posteando un mensaje en Telegram");
             }
             return telegramSendMessageResponse.getResult();
-        } catch (JsonSyntaxException e) {
-            logException(e);
+        } catch (TelegramApiException e) {
             throw  e;
-        } catch (ApiClientException | TelegramApiException e) {
-            throw  e;
+        } catch (Exception e) {
+            throw  new TelegramApiException("Ha ocurrido un error posteando un estado en Telegram", e);
         }
     }
 
@@ -98,11 +96,8 @@ public class TelegramStatusApiImpl implements TelegramStatusApi {
             TelegramDeleteMessageResponse deleteMessageResponse = this.gson.fromJson(response.getResponseStr(), TelegramDeleteMessageResponse.class);
             
             return deleteMessageResponse.isResult();
-        } catch (JsonSyntaxException e) {
-            logException(e);
-            throw  e;
         } catch (ApiClientException e) {
-            throw  e;
+            throw  new TelegramApiException("Ha ocurrido un error eliminado un estado en Telegram", e);
         }
     }
 
@@ -124,14 +119,13 @@ public class TelegramStatusApiImpl implements TelegramStatusApi {
             
             TelegramSendMessageResponse telegramSendMessageResponse = this.gson.fromJson(response.getResponseStr(), TelegramSendMessageResponse.class);
             if (!telegramSendMessageResponse.isOk()) {
-                throw new TelegramApiException(TelegramStatusApiImpl.class.getName(), "Ha ocurrido un error inesperado posteando un mensaje en Telegram");
+                throw new TelegramApiException("Ha ocurrido un error inesperado posteando un mensaje en Telegram");
             }
             return telegramSendMessageResponse.getResult();
-        } catch (JsonSyntaxException e) {
-            logException(e);
+        } catch (TelegramApiException e) {
             throw  e;
-        } catch (ApiClientException | TelegramApiException e) {
-            throw  e;
+        } catch (Exception e) {
+            throw  new TelegramApiException("Ha ocurrido un error posteando un estado con imagen en Telegram", e);
         }
     }
 }
